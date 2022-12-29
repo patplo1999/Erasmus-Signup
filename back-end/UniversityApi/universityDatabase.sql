@@ -35,7 +35,7 @@ CREATE TABLE pwr_faculty (
 );
 
 CREATE TABLE contract_details (
-    id                      smallserial PRIMARY KEY,
+    id                      bigserial PRIMARY KEY,
     accepting_undergraduate boolean,
     accepting_postgraduate  boolean,
     accepting_doctoral      boolean,
@@ -46,7 +46,7 @@ CREATE TABLE contract_details (
 );
 
 CREATE TABLE study_domain (
-    id                      smallserial PRIMARY KEY,
+    id                      bigserial PRIMARY KEY,
     domain_name             varchar(200)
 );
 
@@ -62,33 +62,33 @@ CREATE TABLE subject_language (
 );
 
 CREATE TABLE dest_speciality (
-    id                      smallserial PRIMARY KEY,
+    id                      bigserial PRIMARY KEY,
     dest_university_code    varchar(30) REFERENCES university,
     pwr_faculty_short       t_pwr_fac_sh REFERENCES pwr_faculty,
-    contract_details_id     smallint REFERENCES contract_details,
+    contract_details_id     bigint REFERENCES contract_details,
     study_area_id           varchar(4) REFERENCES study_area,
     subject_language_id     smallint REFERENCES subject_language,
-    interested_students     integer
+    interested_students     bigint
 );
 
 CREATE TABLE min_grade_history (
-    id                      serial PRIMARY KEY,
-    dest_speciality_id      smallint REFERENCES dest_speciality,
-    grade                   real, 
+    id                      bigserial PRIMARY KEY,
+    dest_speciality_id      bigint REFERENCES dest_speciality,
+    grade                   float, 
     semester                varchar(30)
 );
 
 CREATE TABLE pwr_speciality (
-    id                      serial PRIMARY KEY,
+    id                      bigserial PRIMARY KEY,
     name                    varchar(200) NOT NULL,
     pwr_faculty_short       t_pwr_fac_sh REFERENCES pwr_faculty
 );
 
 CREATE TABLE pwr_subject (
-    id                      serial PRIMARY KEY,
+    id                      bigserial PRIMARY KEY,
     name                    varchar(200) NOT NULL,
-    speciality_id           integer REFERENCES pwr_speciality,
-    ects                    integer NOT NULL
+    speciality_id           bigint REFERENCES pwr_speciality,
+    ects                    smallint NOT NULL
 );
 
 --univeristyDB
